@@ -20,15 +20,15 @@ def get_limits(color: str):
         upper1 = np.array([10, 255, 255])
         
         # upper boundary RED color range values; Hue (160 - 180)
-        lower2 = np.array([160,100,20])
+        lower2 = np.array([170,100,20])
         upper2 = np.array([179,255,255])
         
         return lower1, upper1, lower2, upper2
         
     else:
         hsvC = convert_name_color_to_hsv(color)
-        lower_limit = hsvC[0][0][0] - 15 , 100, 20
-        upper_limit = hsvC[0][0][0] + 15 , 255, 255
+        lower_limit = hsvC[0][0][0] - 10 , 100, 20
+        upper_limit = hsvC[0][0][0] + 10 , 255, 255
 
         lower_limit = np.array(lower_limit, dtype=np.uint8)
         upper_limit = np.array(upper_limit, dtype=np.uint8)

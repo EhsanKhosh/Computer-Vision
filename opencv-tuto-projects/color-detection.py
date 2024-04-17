@@ -1,9 +1,10 @@
 import cv2
 from utils import get_limits
+from PIL import Image
 
 cap = cv2.VideoCapture(0)
 
-color = 'red'
+color = 'blue'
 
 while True:
     ret, frame = cap.read()
@@ -16,8 +17,14 @@ while True:
     
     full_mask = lower_mask + upper_mask
 
+    mask_ = Image.fromarray(full_mask)
+    bbox = mask_.getbbox()
 
-    cv2.imshow('frame', full_mask)
+    if bbox is not None:
+        x, y, w, h = bbox
+        frame = cv2.rectangle(frame, (x, y), (w, h), (0, 255, 0), 2)
+
+    cv2.imshow('frame', frame)
     
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
