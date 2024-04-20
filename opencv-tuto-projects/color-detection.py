@@ -4,7 +4,7 @@ from PIL import Image
 
 cap = cv2.VideoCapture(0)
 
-color = 'blue'
+color = 'yellow'
 
 while True:
     ret, frame = cap.read()

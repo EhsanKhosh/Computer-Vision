@@ -27,7 +27,7 @@ def get_limits(color: str):
         
     else:
         hsvC = convert_name_color_to_hsv(color)
-        lower_limit = hsvC[0][0][0] - 10 , 100, 20
+        lower_limit = hsvC[0][0][0] - 10 , 100, 100
         upper_limit = hsvC[0][0][0] + 10 , 255, 255
 
         lower_limit = np.array(lower_limit, dtype=np.uint8)
