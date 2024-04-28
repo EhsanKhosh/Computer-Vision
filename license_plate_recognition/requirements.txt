@@ -1,0 +1,7 @@
+ultralytics
+opencv-python
+easyocr
+numpy
+#for the sort module
+filterpy==1.4.5
+lap==0.4.0
