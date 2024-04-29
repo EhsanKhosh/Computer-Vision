@@ -12,14 +12,14 @@ dict_char_to_int = {'O': '0',
                     'J': '3',
                     'A': '4',
                     'G': '6',
-                    'S': '5'
-                    }
+                    'S': '5'}
+
 dict_int_to_char = {'0':'O',
                     '1':'I',
-                    'J':'3',
-                    'A':'4',
-                    'G':'6',
-                    'S':'5'}
+                    '3':'J',
+                    '4':'A',
+                    '6':'G',
+                    '5':'S'}
 
 
 
@@ -50,8 +50,8 @@ def license_complies_format(text):
 
     if (text[0] in string.ascii_uppercase or text[0] in dict_int_to_char.keys()) and \
        (text[1] in string.ascii_uppercase or text[1] in dict_int_to_char.keys()) and \
-       (text[2] in  num_0_to_9 or text[2] in dict_char_to_int.keys()) and \
-       (text[3] in num_0_to_9 or text[3] in dict_char_to_int.keys()) and \
+       ((text[2] in  num_0_to_9) or (text[2] in dict_char_to_int.keys())) and \
+       ((text[3] in num_0_to_9) or (text[3] in dict_char_to_int.keys())) and \
        (text[4] in string.ascii_uppercase or text[4] in dict_int_to_char.keys()) and \
        (text[5] in string.ascii_uppercase or text[5] in dict_int_to_char.keys()) and \
        (text[6] in string.ascii_uppercase or text[6] in dict_int_to_char.keys()):
@@ -65,7 +65,7 @@ def license_complies_format(text):
 def  format_license(text):
     
     license = ''
-    mapping = {0: dict_char_to_int, 1: dict_int_to_char, 2: dict_char_to_int, 3: dict_char_to_int,
+    mapping = {0: dict_int_to_char, 1: dict_int_to_char, 2: dict_char_to_int, 3: dict_char_to_int,
                4: dict_int_to_char, 5: dict_int_to_char, 6: dict_int_to_char}
     
     for i in range(7):
@@ -83,19 +83,13 @@ def read_license_plate(license_plate_crop):
 
     for detection in detections:
         bbox, text, score = detection
-        print(detection)
-        text.upper().replace(' ', '')
+        text = text.upper().replace(' ', '')
 
         if license_complies_format(text):
             return format_license(text), score
         
     return None, None
 
-
-
-
-
-import pandas as pd
 
 def write_results_to_csv(results, out_path):
     temp_dicts = []  # List to store dictionaries for each frame and car
@@ -118,7 +112,6 @@ def write_results_to_csv(results, out_path):
                 idx += 1
    
 
-    print(temp_dicts)
     df = pd.DataFrame(temp_dicts,index=range(len(temp_dicts)))  # Create DataFrame from the list of dictionaries
     df.to_csv(out_path, index=False)  # Write DataFrame to CSV without index column
 
