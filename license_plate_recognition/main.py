@@ -17,7 +17,11 @@ results = {}
 #load models
 mot_tracker = Sort()
 coco_model = YOLO('./yolov8n.pt')
-license_plate_detector = YOLO('./model/best.pt')
+
+if os.path.exists('./model/best.pt'):
+    license_plate_detector = YOLO('./model/best.pt')
+else :
+    _, license_plate_detector = YOLODetectorTrainer().train()
 
 # load video
 cap = cv2.VideoCapture('./sample.mp4')
