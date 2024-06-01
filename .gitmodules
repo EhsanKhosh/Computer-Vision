@@ -1,0 +1,3 @@
+[submodule "face_attendance"]
+	path = face_attendance
+	url = https://github.com/EhsanKhosh/Computer-Vision
